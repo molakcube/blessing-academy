@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  # 1. 백엔드 주방 (Express 서버)
+  backend:
+    build: ./backend    # 이제 backend 폴더 안의 Dockerfile을 읽으라고 지시합니다.
+    ports:
+      - "4060:4060"
+    volumes:
+      - ./backend/src:/app/src
+    environment:
+      - NODE_ENV=development
+
+  # 2. 프론트엔드 본관 (Next.js 웹 화면)
+  frontend:
+    build: ./frontend   # frontend 폴더 안의 Dockerfile을 읽습니다.
+    ports:
+      - "3000:3000"     # Next.js의 기본 포트는 3000번입니다.
+    volumes:
+      - ./frontend/src:/app/src
+    environment:
+      - NODE_ENV=development
